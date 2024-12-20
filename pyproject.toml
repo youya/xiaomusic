@@ -14,16 +14,13 @@ dependencies = [
     "fastapi>=0.115.4",
     "starlette>=0.37.2",
     "aiofiles>=24.1.0",
-    "ga4mp>=2.0.4",
     "apscheduler>=3.10.4",
     "opencc-python-reimplemented==0.1.7",
     "pillow>=10.4.0",
     "python-multipart>=0.0.12",
     "requests>=2.32.3",
-    "sentry-sdk[fastapi]==1.45.1",
 ]
-requires-python = ">=3.10,<=3.12"
-readme = "README.md"
+requires-python = ">=3.10"
 license = {text = "MIT"}
 
 [project.urls]
@@ -71,6 +68,10 @@ extend-immutable-calls = [
     "fastapi.params.Query",
     "fastapi.File"
 ]
+
+[[tool.uv.index]]
+url = "https://mirrors.huaweicloud.com/repository/pypi/simple"
+default = true
 
 [tool.pdm.scripts]
 lint = "ruff check ."

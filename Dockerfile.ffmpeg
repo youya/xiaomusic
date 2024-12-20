@@ -1,0 +1,14 @@
+FROM docker.io/library/python:3.12-slim AS builder
+
+RUN sed -i 's/deb.debian.org/mirrors.huaweicloud.com/g' /etc/apt/sources.list.d/debian.sources
+
+RUN apt update \
+    && apt -y install --no-install-recommends curl ca-certificates xz-utils
+
+RUN mkdir -p /app/ffmpeg/bin
+RUN curl -L https://github.com/yt-dlp/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-linux64-gpl.tar.xz \
+        | tar -Jx --strip=2 -C /app/ffmpeg/bin ffmpeg-master-latest-linux64-gpl/bin/ffmpeg ffmpeg-master-latest-linux64-gpl/bin/ffprobe
+
+FROM scratch
+
+COPY --from=builder /app /app
